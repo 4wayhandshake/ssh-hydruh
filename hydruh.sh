@@ -104,7 +104,7 @@ for keyfile in "$key_directory"/*; do
             # Fork a separate process for each host you try this user on
             {
                 # Run ssh in the background with a timeout (3s)
-                if timeout 3 ssh -n -o BatchMode=yes -i "$keyfile" "$user"@"$host" exit > /dev/null 2>&1; then
+                if timeout 3 ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -i "$keyfile" "$user"@"$host" exit > /dev/null 2>&1; then
                     echo -e "${GREEN}[+]${NC} Success: ${GREEN}$keyfile${NC} on ${GREEN}$host${NC} as ${GREEN}$user${NC}"
                 else
                     echo -e "${BLUE}[-] Failed: $keyfile on $host as $user${NC}"
